@@ -69,6 +69,8 @@ vector <vector <Point2f>> GetFontEdgePoints(){
 	namedWindow("Font Image",WINDOW_NORMAL);
 	setMouseCallback("Font Image",onMouse2,(void*) &points);
 	imshow("Font Image",FontImg);
+	cout << "Use left button to get a point on the edge" << endl;
+	cout << "Use right button to start capturing a new stroke" << endl;
 	cout << "The first part:\n";
 	waitKey();
 
