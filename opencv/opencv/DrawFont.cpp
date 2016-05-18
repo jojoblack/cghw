@@ -11,8 +11,8 @@ using namespace cv;
 
 void myLine(Mat & img, int y1, int x1, int y2, int x2){
 	assert(x1 <= img.cols && x2 <= img.cols && y1 <= img.rows && y2 <= img.rows);
-	//  Later I'll use bresenham Algorithm to draw a line
 
+	//  Later I'll use bresenham Algorithm to draw a line
 	//  First I draw a line directly using the line equation
 	if (x1 == x2){
 		for (int k = min(y1,y2); k != max(y1,y2); k++){
@@ -23,15 +23,21 @@ void myLine(Mat & img, int y1, int x1, int y2, int x2){
 			img.at<uchar>(k,y1) = 255;
 		}
 	} else {
-		int xs = min(x1,x2);
-		int ys = min(y1,y2);
-		int xe = max(x1,x2);
-		int ye = max(y1,y2);
-		double k = (1.0*(ye-ys))/(xe-xs);
-		for (int i = xs; i <= xe; i++){
-			int j = ys + k*(i-xs);
-			img.at<uchar>(i,j) = 255;
-		}
+		//  draw the line using the line equation
+		double k = (1.0*(y2-y1))/(x2-x1);
+		if (x2 > x1)
+			for (int i = x1; i <= x2; i++){
+				int j = y1 + k*(i-x1);
+				img.at<uchar>(i,j) = 255;
+			}
+		else
+			for (int i = x1; i >= x2; i--){
+				int j = y1 + k*(i-x1);
+				img.at<uchar>(i,j) = 255;
+			}
+
+		//  draw the line using bresenham algorithm
+
 	}
 }
 
